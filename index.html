@@ -650,7 +650,7 @@ const contactTpl = (t) => { const c = t.contact;
     ? [CONTACT.whatsapp && `<a href="${CONTACT.whatsapp}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`, CONTACT.instagram && `<a href="${CONTACT.instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>`].filter(Boolean).join(" · ")
     : "[WhatsApp] · [Instagram]";
   const anyPh = EMAIL_IS_PLACEHOLDER || !CONTACT.phone || !(CONTACT.whatsapp || CONTACT.instagram);
-<section id="contact" class="section contact" aria-labelledby="contact-title"><div class="wrap g12">
+return `<section id="contact" class="section contact" aria-labelledby="contact-title"><div class="wrap g12">
   <div class="ct-left">
     ${eyebrow("05", c.eyebrow, true)}
     <h2 id="contact-title" class="display h2 h2-contact io">${masks([c.title])}</h2>
