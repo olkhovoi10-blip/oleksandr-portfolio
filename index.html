@@ -339,7 +339,7 @@ footer{overflow:hidden;background:var(--paper);padding-top:80px}
 const CONTACT = {
   email: "Olkhovoi10@gmail.com",      // replace with your real email
   phone: "+41 79 573 06 87",                             // e.g. "+41 79 123 45 67" (leave empty to show placeholder)
-  linkedin: "",                          // e.g. "https://www.linkedin.com/in/your-profile"
+  whatsapp: "https://wa.me/41795730687",                          // e.g. "https://www.linkedin.com/in/your-profile"
   instagram: "https://instagram.com/x_a_z_a"                          // e.g. "https://www.instagram.com/your-profile"
 };
 const EMAIL_IS_PLACEHOLDER = CONTACT.email === "your-email@example.com";
@@ -646,11 +646,10 @@ const contactTpl = (t) => { const c = t.contact;
   const tag = `<span class="ph">${c.placeholder}</span>`;
   const emailVal = EMAIL_IS_PLACEHOLDER ? `[${CONTACT.email}]` : `<a href="mailto:${CONTACT.email}">${CONTACT.email}</a>`;
   const phoneVal = CONTACT.phone ? `<a href="tel:${CONTACT.phone.replace(/\s/g, "")}">${CONTACT.phone}</a>` : "[+41 XX XXX XX XX]";
-  const socialVal = (CONTACT.linkedin || CONTACT.instagram)
-    ? [CONTACT.linkedin && `<a href="${CONTACT.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`, CONTACT.instagram && `<a href="${CONTACT.instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>`].filter(Boolean).join(" · ")
-    : "[LinkedIn] · [Instagram]";
-  const anyPh = EMAIL_IS_PLACEHOLDER || !CONTACT.phone || !(CONTACT.linkedin || CONTACT.instagram);
-  return `
+  const socialVal = (CONTACT.whatsapp || CONTACT.instagram)
+    ? [CONTACT.whatsapp && `<a href="${CONTACT.whatsapp}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`, CONTACT.instagram && `<a href="${CONTACT.instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>`].filter(Boolean).join(" · ")
+    : "[WhatsApp] · [Instagram]";
+  const anyPh = EMAIL_IS_PLACEHOLDER || !CONTACT.phone || !(CONTACT.whatsapp || CONTACT.instagram);
 <section id="contact" class="section contact" aria-labelledby="contact-title"><div class="wrap g12">
   <div class="ct-left">
     ${eyebrow("05", c.eyebrow, true)}
