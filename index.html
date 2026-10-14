@@ -768,12 +768,35 @@ function submitForm(e) {
     return;
   }
   const business = c.options[Number(v.business)];
-  const subject = `${c.mailSubject} — ${v.name.trim()}`;
-  const body = `${c.name}: ${v.name.trim()}\n${c.email}: ${v.email.trim()}\n${c.business}: ${business}\n\n${c.message}:\n${v.message.trim()}`;
-  window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  formSent = true; errors = {};
+const subject = `${c.mailSubject} — ${v.name.trim()}`;
+
+const data = new FormData();
+data.append("name", v.name.trim());
+data.append("email", v.email.trim());
+data.append("_replyto", v.email.trim());
+data.append("business", business);
+data.append("message", v.message.trim());
+data.append("_subject", subject);
+
+fetch("https://formspree.io/f/myekbgoz", {
+method: "POST",
+body: data,
+headers: { "Accept": "application/json" }
+})
+.then(response => {
+if (!response.ok) throw new Error("Form submission failed");
+
+  formSent = true;
+  errors = {};
   document.getElementById("formWrap").innerHTML = formTpl(c);
-  document.getElementById("again").addEventListener("click", () => { formSent = false; rerenderForm(); });
+  document.getElementById("again").addEventListener("click", () => {
+    formSent = false;
+    rerenderForm();
+  });
+})
+.catch(() => {
+  alert("Message could not be sent. Please email Olkhovoi10@gmail.com directly.");
+});
 }
 
 /* ===== smooth scroll, nav, menu ===== */
